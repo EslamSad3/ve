@@ -5,8 +5,11 @@ import axios from "axios";
 import car2 from "../images/character-2.png";
 import speech from "../images/speech-bubble-2.png";
 import icon from "../images/Icons.png";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 function Login() {
+  const navigate = useNavigate();
   const Schema = Yup.object().shape({
     password: Yup.string().min(5, "Too Short").required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
@@ -19,14 +22,19 @@ function Login() {
     },
     validationSchema: Schema,
     onSubmit: async (values) => {
-        console.log(values);
+      console.log(values);
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/api/Account/login`,
           values
         );
-        console.log("Login Successful:", response.data);
+        console.log(response);
+        if (response.status === 200) {
+          toast.success(`Loggin Successful`);
+          navigate("/dashboard");
+        }
       } catch (error) {
+        toast.error("Wrong Email Or Password");
         console.error(
           "Login Error:",
           error.response ? error.response.data : error.message
@@ -124,6 +132,7 @@ function Login() {
           </div>
         </div>
       </div>
+      {/* <ToastContainer /> */}
     </>
   );
 }
