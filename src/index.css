@@ -1,13 +1,53 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.login-container {
+    max-width: 400px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.info-container {
+    text-align: center;
+}
+
+.logo h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: rgba(56, 24, 76, 1);
+    margin: 0;
+}
+
+.btn-primary {
+    background-color: rgba(56, 24, 76, 1);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: rgba(56, 24, 76, 1);
+}
+
+.form-control:focus {
+    border-color: rgba(56, 24, 76, 1);
+    box-shadow: 0 0 0 0.2rem rgba(56, 24, 76, 0.25);
+}
+.left-side{
+    background: linear-gradient(128.38deg, rgba(179, 231, 242, 0.5) 30.34%, rgba(156, 182, 217, 0.3) 79.45%, rgba(63, 142, 191, 0.22) 144.06%);
+}
+
+@media (max-width: 991.98px) {
+    .col-lg-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    }
+
+    .info-container {
+    display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .bg-light {
+    background-color: #e0f7fa !important;
+    }
 }
