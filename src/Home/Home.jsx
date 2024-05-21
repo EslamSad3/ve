@@ -1,24 +1,54 @@
-import axios from "axios";
+import axios from "../axoisConfig";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { toast } from "react-toastify";
 
 function Home() {
+  const [show, setShow] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setSelectedProductId(id);
+    setShow(true);
+  };
+
   const [products, setProducts] = useState([]);
   const getAllProducts = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/Admin/GetAllProducts`
-      );
+      const response = await axios.get(`/api/Admin/GetAllProducts`, {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
+
       setProducts(response?.data);
-      console.log(response);
+      console.log(response?.data, "respone");
     } catch (error) {
       console.log(error);
     }
   };
 
+  const deleteProduct = async (id) => {
+    // Uncomment and use the line below to actually delete the product from your backend
+    await axios.delete(
+      `${process.env.REACT_APP_BASE_URL}/api/Admin/Delete/${id}`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      }
+    );
+    toast.success(`Item ${id} deleted`);
+    handleClose();
+  };
+
   useEffect(() => {
     getAllProducts();
-  }, []);
+  }, [deleteProduct]);
+
   return (
     <>
       <div className="container-fluid vh-100">
@@ -60,43 +90,62 @@ function Home() {
             <main>
               <h3>Admin</h3>
               <div className="product-list">
-                {products.map((product) => {
-                  return (
-                    <div
-                      key={product.id}
-                      className="product-item d-flex justify-content-between align-items-center p-3 mb-3"
-                    >
-                      <img
-                        src={product.picture_url}
-                        alt={product.product_name}
-                        className="product-img"
-                      />
-                      <div className="product-info">
-                        <h5>{product.product_name}</h5>
-                        <p>
-                          ${product.price} | {product.description} |
-                          {product?.brands?.brand_name}
-                        </p>
-                      </div>
-                      <div className="action-links">
-                        <a href="#" className="btn btn-link update-link">
-                          update
-                        </a>
-                        <a href="#" className="btn btn-link delete-link">
-                          delete
-                        </a>
-                      </div>
-                      <button className="btn btn-link">
-                        <i className="fas fa-ellipsis-v"></i>
-                      </button>
+                {products.map((product) => (
+                  <div
+                    key={product.id}
+                    className="product-item d-flex justify-content-between align-items-center p-3 mb-3"
+                  >
+                    <img
+                      src={product.picture_url}
+                      alt={product.product_name}
+                      className="product-img"
+                    />
+                    <div className="product-info">
+                      <h5>{product.product_name}</h5>
+                      <p>
+                        ${product.price} | {product.description} |
+                        {product?.brands?.brand_name}
+                      </p>
                     </div>
-                  );
-                })}
+                    <div className="action-links">
+                      <a href="#" className="btn btn-link update-link">
+                        update
+                      </a>
+                      <Button
+                        className="btn btn-danger"
+                        onClick={() => handleShow(product.id)}
+                      >
+                        delete
+                      </Button>
+                    </div>
+                    <button className="btn btn-link">
+                      <i className="fas fa-ellipsis-v"></i>
+                    </button>
+                  </div>
+                ))}
               </div>
             </main>
           </div>
         </div>
       </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" onClick={handleClose}>
+            No
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => deleteProduct(selectedProductId)}
+          >
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

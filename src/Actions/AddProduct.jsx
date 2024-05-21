@@ -6,6 +6,11 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 function AddProduct() {
+  const headers = {
+    headers: {
+      "ngrok-skip-browser-warning": "true",
+    },
+  };
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
@@ -52,7 +57,8 @@ function AddProduct() {
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/api/Admin/Add`,
-          payload
+          payload,
+          headers
         );
         if (response.status === 200) {
           navigate("/dashboard");
@@ -71,9 +77,11 @@ function AddProduct() {
   const getAllBrands = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/Admin/GetBrands`
+        `${process.env.REACT_APP_BASE_URL}/api/Admin/GetBrands`,
+        headers
       );
       setBrands(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching brands:", error);
     }
@@ -82,9 +90,11 @@ function AddProduct() {
   const getAllCategories = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/Admin/GetCategories`
+        `${process.env.REACT_APP_BASE_URL}/api/Admin/GetCategories`,
+        headers
       );
       setCategories(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
