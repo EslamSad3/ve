@@ -16,6 +16,7 @@ function Home() {
   };
 
   const [products, setProducts] = useState([]);
+  console.log("ay haga")
   const getAllProducts = async () => {
     try {
       const response = await axios.get(`/api/Admin/GetAllProducts`, {
