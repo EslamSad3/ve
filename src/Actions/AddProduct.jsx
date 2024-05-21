@@ -117,7 +117,13 @@ function AddProduct() {
               Profile
             </Link>
             <Link className="nav-link active" to={"/addProduct"}>
-              Add
+              Add Product
+            </Link>
+            <Link className="nav-link active" to={"/addbrand"}>
+              Add Brand
+            </Link>
+            <Link className="nav-link active" to={"/addcat"}>
+              Add Category
             </Link>
           </nav>
         </div>

@@ -4,6 +4,8 @@ import * as ReactDOM from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Home/Home";
 import AddProduct from "./Actions/AddProduct";
+import AddBrand from "./Actions/AddBrand";
+import AddCat from "./Actions/AddCat";
 function App() {
   const router = createBrowserRouter([
     {
@@ -17,6 +19,16 @@ function App() {
     {
       path: "/addproduct",
       element: <AddProduct />,
+    },
+
+    {
+      path: "/addbrand",
+      element: <AddBrand />,
+    },
+
+    {
+      path: "/addcat",
+      element: <AddCat />,
     },
   ]);
   return (

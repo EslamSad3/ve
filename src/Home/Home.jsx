@@ -16,7 +16,8 @@ function Home() {
   };
 
   const [products, setProducts] = useState([]);
-  console.log("ay haga")
+
+  console.log("ay haga");
   const getAllProducts = async () => {
     try {
       const response = await axios.get(`/api/Admin/GetAllProducts`, {
@@ -48,7 +49,7 @@ function Home() {
 
   useEffect(() => {
     getAllProducts();
-  }, [deleteProduct]);
+  }, []);
 
   return (
     <>
@@ -59,11 +60,17 @@ function Home() {
               <h2>Vision Ear</h2>
             </div>
             <nav className="nav flex-column">
-              <Link className="nav-link active" to={"/dashboard"}>
+              <Link className="nav-link" to={"/dashboard"}>
                 Profile
               </Link>
               <Link className="nav-link active" to={"/addProduct"}>
                 Add Product
+              </Link>
+              <Link className="nav-link active" to={"/addcbrand"}>
+                Add Brand
+              </Link>
+              <Link className="nav-link active" to={"/addcat"}>
+                Add Category
               </Link>
             </nav>
           </div>
@@ -92,6 +99,8 @@ function Home() {
               <h3>Admin</h3>
               <div className="product-list">
                 {products.map((product) => (
+                  // higher order function
+
                   <div
                     key={product.id}
                     className="product-item d-flex justify-content-between align-items-center p-3 mb-3"
