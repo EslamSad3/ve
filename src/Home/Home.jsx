@@ -66,7 +66,7 @@ function Home() {
               <Link className="nav-link active" to={"/addProduct"}>
                 Add Product
               </Link>
-              <Link className="nav-link active" to={"/addcbrand"}>
+              <Link className="nav-link active" to={"/addbrand"}>
                 Add Brand
               </Link>
               <Link className="nav-link active" to={"/addcat"}>
@@ -118,9 +118,12 @@ function Home() {
                       </p>
                     </div>
                     <div className="action-links">
-                      <a href="#" className="btn btn-link update-link">
+                      <Link
+                        to={`/updateProduct/${product.id}`}
+                        className="btn btn-warning mx-1"
+                      >
                         update
-                      </a>
+                      </Link>
                       <Button
                         className="btn btn-danger"
                         onClick={() => handleShow(product.id)}
@@ -128,9 +131,6 @@ function Home() {
                         delete
                       </Button>
                     </div>
-                    <button className="btn btn-link">
-                      <i className="fas fa-ellipsis-v"></i>
-                    </button>
                   </div>
                 ))}
               </div>

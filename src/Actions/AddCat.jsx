@@ -60,7 +60,7 @@ function AddCat() {
             <Link className="nav-link active" to={"/addProduct"}>
               Add Product
             </Link>
-            <Link className="nav-link active" to={"/addcbrand"}>
+            <Link className="nav-link active" to={"/addbrand"}>
               Add Brand
             </Link>
             <Link className="nav-link active" to={"/addcat"}>

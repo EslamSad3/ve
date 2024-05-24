@@ -6,6 +6,7 @@ import Home from "./Home/Home";
 import AddProduct from "./Actions/AddProduct";
 import AddBrand from "./Actions/AddBrand";
 import AddCat from "./Actions/AddCat";
+import UpdateProduct from "./Actions/UpdateProduct";
 function App() {
   const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ function App() {
     {
       path: "/addproduct",
       element: <AddProduct />,
+    },
+    {
+      path: "/updateProduct/:id",
+      element: <UpdateProduct />,
     },
 
     {
